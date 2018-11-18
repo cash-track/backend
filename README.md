@@ -1,21 +1,28 @@
-# Lumen PHP Framework
+# Backend
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+Cash Track its an online tracking system which provide an easy way to track your money streams.
 
-## Official Documentation
+You are free to use this service, collaborate and recommend it your friends or contribute it for new improvements.
 
-Documentation for the framework can be found on the [Lumen website](http://lumen.laravel.com/docs).
+## Push to registry
 
-## Security Vulnerabilities
+```bash
+$ docker build . -t cashtrack/backend:latest --no-cache
+$ docker push cashtrack/backend:latest
+```
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+## Technologies stack
+
+- `PHP 7.2`
+- `Laravel`
+- `MySQL`
+- `Docker`
+- `Redis`
+- `VueJS`
+- `Mailgun`
 
 ## License
 
-The Lumen framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Cash Track is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).

@@ -1,54 +1,50 @@
-FROM php:7.2-fpm
+FROM php:7.2.12-fpm
 
-# Install libraries
+ARG APP_ENV=production
+ENV APP_ENV ${APP_ENV}
+
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         curl \
-        libmemcached-dev \
+        git \
+        unzip \
         libz-dev \
         libpq-dev \
+        zlib1g-dev \
         libjpeg-dev \
-        libpng12-dev \
+        libpng-dev \
+        libicu-dev \
         libfreetype6-dev \
         libssl-dev \
         libmcrypt-dev \
-        libxml2-dev \
-        php-soap \
-        zlib1g-dev \
-        libicu-dev \
-        g++ \
     && rm -rf /var/lib/apt/lists/*
 
-# Install the PHP extentions
-RUN docker-php-ext-install mcrypt \
-    && docker-php-ext-install pdo_mysql \
-    && docker-php-ext-install pdo_pgsql \
-    && docker-php-ext-install soap \
-    && docker-php-ext-install opcache \
-    && docker-php-ext-install mysqli \
-    && docker-php-ext-install tokenizer \
+# Git network issue fix
+RUN git config --global http.sslVerify false;
+
+RUN docker-php-ext-install pdo_mysql mysqli \
     && docker-php-ext-configure gd \
-        --enable-gd-native-ttf \
         --with-jpeg-dir=/usr/lib \
-        --with-freetype-dir=/usr/include/freetype2 && \
-        docker-php-ext-install gd \
+        --with-freetype-dir=/usr/include/freetype2 \
+    && docker-php-ext-install gd \
+    && pecl install -o -f redis \
+    && docker-php-ext-enable redis \
     && docker-php-ext-configure intl \
-    && docker-php-ext-install intl
+    && docker-php-ext-install intl \
+    && docker-php-ext-install zip \
+    && docker-php-ext-install tokenizer \
+    && rm -rf /tmp/pear
 
-# Redis
-RUN pecl install -o -f redis \
-    && rm -rf /tmp/pear \
-    && docker-php-ext-enable redis
-
-# Finalisation
-COPY ./config/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
-ADD ./config/app.ini /usr/local/etc/php/conf.d
-ADD ./config/app.pool.conf /usr/local/etc/php-fpm.d/
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN usermod -u 1000 www-data
 
+COPY . /var/www
+
 WORKDIR /var/www
 
-CMD ["php-fpm"]
+RUN if [ $APP_ENV = "production" ] ; \
+    then composer install \
+    ; fi
 
 EXPOSE 9000

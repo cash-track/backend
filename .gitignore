@@ -1,4 +1,5 @@
-vendor/
-.idea/
-public/storage
+/public/storage
+/vendor
+/.idea
 .env
+.phpunit.result.cache
