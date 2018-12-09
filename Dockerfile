@@ -1,4 +1,4 @@
-FROM php:7.2.12-fpm
+FROM php:7.3-rc-fpm
 
 ARG APP_ENV=production
 ENV APP_ENV ${APP_ENV}
@@ -11,6 +11,7 @@ RUN apt-get update \
         libz-dev \
         libpq-dev \
         zlib1g-dev \
+        libzip-dev \
         libjpeg-dev \
         libpng-dev \
         libicu-dev \
@@ -35,6 +36,13 @@ RUN docker-php-ext-install pdo_mysql mysqli \
     && docker-php-ext-install tokenizer \
     && rm -rf /tmp/pear
 
+# XDebug only for local
+# TODO. Update XDebug to stable when it is come
+RUN if [ $APP_ENV = "local" ] ; then \
+        pecl install xdebug-2.7.0beta1 \
+        && docker-php-ext-enable xdebug \
+    ; fi
+
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN usermod -u 1000 www-data
@@ -43,8 +51,8 @@ COPY . /var/www
 
 WORKDIR /var/www
 
-RUN if [ $APP_ENV = "production" ] ; \
-    then composer install \
+RUN if [ $APP_ENV = "production" ] ; then \
+        composer install \
     ; fi
 
 EXPOSE 9000

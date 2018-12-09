@@ -1,3 +1,6 @@
-.git
-.idea
-.DS_Store
+.git*
+.idea*
+.DS_Store*
+.env*
+.phpstorm.meta.php
+_ide_helper.php
