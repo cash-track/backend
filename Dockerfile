@@ -1,4 +1,4 @@
-FROM php:7.3-rc-fpm
+FROM php:7.3-fpm
 
 ARG APP_ENV=production
 ENV APP_ENV ${APP_ENV}
@@ -41,6 +41,8 @@ RUN docker-php-ext-install pdo_mysql mysqli \
 RUN if [ $APP_ENV = "local" ] ; then \
         pecl install xdebug-2.7.0beta1 \
         && docker-php-ext-enable xdebug \
+        && echo "xdebug.remote_enable=1\n" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+        && echo "xdebug.remote_port=9001\n" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     ; fi
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
