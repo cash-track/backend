@@ -13,16 +13,6 @@ $ docker build . -t cashtrack/backend:latest --no-cache
 $ docker push cashtrack/backend:latest
 ```
 
-## Technologies stack
-
-- `PHP 7.2`
-- `Laravel`
-- `MySQL`
-- `Docker`
-- `Redis`
-- `VueJS`
-- `Mailgun`
-
 ## License
 
 Cash Track is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).

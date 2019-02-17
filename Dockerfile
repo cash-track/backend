@@ -39,7 +39,7 @@ RUN docker-php-ext-install pdo_mysql mysqli \
 # XDebug only for local
 # TODO. Update XDebug to stable when it is come
 RUN if [ $APP_ENV = "local" ] ; then \
-        pecl install xdebug-2.7.0beta1 \
+        pecl install xdebug-2.7.0RC2 \
         && docker-php-ext-enable xdebug \
         && echo "xdebug.remote_enable=1\n" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
         && echo "xdebug.remote_port=9001\n" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
