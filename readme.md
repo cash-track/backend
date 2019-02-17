@@ -11,7 +11,6 @@ You are free to use this service, collaborate and recommend it your friends or c
 ```bash
 $ docker build . -t cashtrack/backend:latest --no-cache
 $ docker push cashtrack/backend:latest
-$
 ```
 
 ## License
