@@ -13,4 +13,14 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    /**
+     * Render Vue's pages
+     *
+     * @return \Illuminate\View\View
+     */
+    public function fallback()
+    {
+        return view('fallback');
+    }
 }
