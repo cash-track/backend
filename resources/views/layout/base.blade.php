@@ -7,19 +7,31 @@
 
     <title>@yield('title')</title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,500">
+
     <link href="http://static.cash-track.localhost/dist/app.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
 <div id="app">
-    <v-app light>
-        <v-navigation-drawer app></v-navigation-drawer>
-        <v-toolbar app></v-toolbar>
-        <v-content>
+    <mdc-layout-app>
+
+        <mdc-toolbar slot="toolbar">
+            <!--  toolbar markup here -->
+        </mdc-toolbar>
+
+        <mdc-drawer slot="drawer">
+            <!--  drawer markup here -->
+        </mdc-drawer>
+
+        <main>
             @yield('content')
-        </v-content>
-        <v-footer app></v-footer>
-    </v-app>
+        </main>
+
+    </mdc-layout-app>
 </div>
 
 <script src="http://static.cash-track.localhost/dist/app.js"></script>
