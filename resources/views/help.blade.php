@@ -1,13 +1,19 @@
-@extends('layout.base')
+@extends('layouts.public')
 
 @section('title') Help @endsection
 
 @section('content')
-    <div class="content">
-        <div class="title m-b-md">
-            Help
-        </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">Help</div>
 
-        @include('modules.sub-menu')
+                    <div class="card-body">
+                        Help
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
